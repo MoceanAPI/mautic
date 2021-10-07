@@ -1,0 +1,11 @@
+{
+    "name": "mocean/mautic-mocean-api-broadcast",
+    "description": "MoceanAPI Broadcast plugin allows sending of text messages in bulk to contacts (leads) by using MoceanAPI service.",
+    "type": "mautic-plugin",
+    "version": "1.0",
+    "keywords": ["mautic","plugin","integration","sms","broadcast"],
+    "require": {
+        "php": ">=7.4.0 <8.1", 
+        "mautic/core-lib": "^4.0"
+    }
+}
