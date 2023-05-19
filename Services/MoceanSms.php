@@ -1,7 +1,7 @@
 <?php
 namespace MauticPlugin\MoceanApiBroadcastBundle\Services;
 
-class MoceanSms 
+class MoceanSms
 {
     protected $apiKey;
     protected $apiSecret;
@@ -10,55 +10,55 @@ class MoceanSms
     protected $message;
     protected $countryCode;
 
-    function setApiKey($apiKey) 
+    function setApiKey($apiKey)
     {
         $this->apiKey = $apiKey;
     }
-    
-    function setApiSecret($apiSecret) 
+
+    function setApiSecret($apiSecret)
     {
         $this->apiSecret = $apiSecret;
     }
-    
-    function getSender() 
+
+    function getSender()
     {
         return $this->sender;
     }
-    
-    function setSender($sender) 
+
+    function setSender($sender)
     {
         $this->sender = $sender;
     }
-    
-    function getRecipient() 
+
+    function getRecipient()
     {
         return $this->recipient;
     }
-    
-    function setRecipient($recipient) 
+
+    function setRecipient($recipient)
     {
         $this->recipient = $recipient;
     }
-    
-    function getMessage() 
+
+    function getMessage()
     {
         return $this->message;
     }
-    
-    function setMessage($message) 
+
+    function setMessage($message)
     {
         $this->message = $message;
     }
-    
-    function setCountryCode($countryCode) 
+
+    function setCountryCode($countryCode)
     {
         $this->countryCode = $countryCode;
     }
-    
+
    /**
     * SMS API.
     */
-    function sendBroadcast() 
+    function sendBroadcast()
     {
         $url = 'https://rest.moceanapi.com/rest/2/sms';
         $fields = array(
@@ -91,11 +91,11 @@ class MoceanSms
         //returns an array
         return $json;
     }
-    
+
     /**
     * Query API check credits.
     */
-    public function getCredit() 
+    public function getCredit()
     {
         $url = 'https://rest.moceanapi.com/rest/1/account/balance?';
         $fields = array(
@@ -123,15 +123,15 @@ class MoceanSms
         curl_close($ch);
 
         $json = json_decode($result, true);
-   
+
         //returns an array
         return $json;
     }
-  
+
    /**
     * Query API check pricing and currency.
     */
-    public function getPricing() 
+    public function getPricing()
     {
         $url = 'https://rest.moceanapi.com/rest/2/account/pricing?';
         $fields = array(
@@ -154,23 +154,23 @@ class MoceanSms
         curl_setopt($ch,CURLOPT_URL, $url_final);
         curl_setopt($ch,CURLOPT_HTTPGET, 1);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-  
+
         $result = curl_exec($ch);
 
         curl_close($ch);
 
         $json = json_decode($result, true);
-    
+
         //returns an array
         return $json;
     }
-    
+
     /**
     * Dev API check country code.
     */
-    public function checkCountryCode() 
+    public function checkCountryCode()
     {
-        $url = 'https://dev.moceansms.com/public/mobileChecking?';
+        $url = 'https://dashboard.moceanapi.com/public/mobileChecking?';
         $fields = array(
             'mobile_number'=>$this->recipient,
             'country_code'=>$this->countryCode
@@ -193,7 +193,7 @@ class MoceanSms
         $result = curl_exec($ch);
 
         curl_close($ch);
-   
+
         //returns checked mobile number, empty if invalid format
         return $result;
     }
